@@ -22,6 +22,7 @@ object Frequency {
     // 0.329 to 1.014 = 4 => 0.2
     // 1.014 to 1.7 = 4 => 0.2
 
+    // показываю гистограмму частот графиком
     var seq: Seq[(Double, Double)] = Seq((histogram(0)._1-0.0001, 0.0))
     for (i <- 0 until k) seq = seq ++ Seq((histogram(i)._1, histogram(i)._2.toDouble / func.size),
       (histogram(i+1)._1-0.0001, histogram(i)._2.toDouble / func.size))
@@ -29,5 +30,13 @@ object Frequency {
     var dataset2 = Seq(("y = 0", for (x <- -2.0 to func(0) by 0.01) yield (x, 0.0)))
     dataset2 = dataset2 :+ ("", seq.toIndexedSeq)
     XYLineChart(dataset2.toXYSeriesCollection()).show("Гистограмма частот", (1280, 720), scrollable = true)
+
+    // показываю гистограмму частот гистограммой
+    var dataset3 = Seq[(String, Double)]()
+    for (i <- 0 until k) dataset3 = dataset3 :+ ((s"${BigDecimal(histogram(i)._1).setScale(3, BigDecimal.RoundingMode.HALF_UP).toString}" +
+      s" to ${BigDecimal(histogram(i+1)._1).setScale(3, BigDecimal.RoundingMode.HALF_UP).toString}") ->histogram(i)._2.toDouble / func.size)
+    dataset3.foreach(x => println(x))
+    val chart = BarChart(dataset3)
+    chart.show("Гистограмма частот", (1280, 720), scrollable = true)
   }
 }

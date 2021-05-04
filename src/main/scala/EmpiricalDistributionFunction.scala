@@ -12,7 +12,7 @@ object EmpiricalDistributionFunction {
       if (i == 11) println(s" F* 20(х) = | ${i.toDouble / 20}, ${func(i-1)} < x <= ${func(i)}")
       println(s"$tabs| ${i.toDouble / 20}, ${func(i-1)} < x <= ${func(i)}")
     }
-    print(s"$tabs| 1, x > ${func(func.size-1)}\n$tabs ‾‾‾‾")
+    println(s"$tabs| 1, x > ${func(func.size-1)}\n$tabs ‾‾‾‾")
 
 
     var dataset = Seq((0.toString, for (x <- -2.0 to func(0) by 0.01) yield (x, 0.0)))
