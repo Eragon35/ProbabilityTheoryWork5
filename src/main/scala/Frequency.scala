@@ -16,8 +16,8 @@ object Frequency {
 
 
     // высчитываю данные для гистограммы частот
-    val k = (Math.log10(func.size)/Math.log10(2) + 1).toInt // k = log2 (20) + 1
-    val l = (func(func.size - 1) - func(0)) / k //
+    val k = (Math.log10(func.size)/Math.log10(2) + 1).toInt // k = 1+ log2 (20).roundDown - число интервалов выборки
+    val l = (func(func.size - 1) - func(0)) / k // длинна интервала
     var histogram: ArrayBuffer[(Double, Int)] = ArrayBuffer[(Double, Int)]() // (начало промежутка, число значений на нём)
     for (i <- 0 until k) histogram = histogram :+ (func(0) + l * i,
       func.count(_ < func(0) + l * (i+1) + 0.01) - histogram.map(z => z._2).sum)
@@ -40,11 +40,10 @@ object Frequency {
     // показываю гистограмму частот гистограммой
     var dataset4 = Seq[(String, Double)]()
     for (i <- 0 until k) dataset4 = dataset4 :+ (
-      (s"${BigDecimal(histogram(i)._1).setScale(3, BigDecimal.RoundingMode.HALF_UP).toString}" +
+      (s"${BigDecimal(histogram(i)._1).setScale(3, BigDecimal.RoundingMode.HALF_UP).toString}" + // имя столбца
       s" to ${BigDecimal(histogram(i+1)._1).setScale(3, BigDecimal.RoundingMode.HALF_UP).toString}") ->
-        histogram(i)._2.toDouble / func.size
+        histogram(i)._2.toDouble / func.size // значение(высота) столбца
     )
-//    dataset4.foreach(x => println(x))
     BarChart(dataset4).show("Гистограмма частот", (1280, 720), scrollable = true)
   }
 }
