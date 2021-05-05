@@ -11,6 +11,7 @@ object Main extends App {
   var expectedValue: Double = array.sum / array.size // математическое ожидание
   var standardDeviation: Double = array.map(x => Math.pow(expectedValue - x, 2)).sum // среднеквадратическое отклонения
 
+  // выводим получившиеся значения
   print("Исходный ряд:")
   array.foreach(x => print(s" $x"))
   print("\nВариационный ряд:")
