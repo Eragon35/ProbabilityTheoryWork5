@@ -15,3 +15,5 @@ for(i <- 1 until 20) println(i.toDouble / 20)
 
 val seq = Seq(1, 2, 3, 4)
 val imSeq = seq.toIndexedSeq
+
+4.9.toInt

@@ -17,7 +17,8 @@ object Main extends App {
   print("\nВариационный ряд:")
   sortedArray.foreach(x => print(s" $x"))
   println(s"\nПервая порядковая статистика = $firstOrdinalStatistics\nПоследняя порядковая статистика = $lastOrdinalStatistics" +
-    s"\nРазмах = $range\nМатематическое ожидание = $expectedValue\nСреднеквадратическое отклонение = $standardDeviation")
+    f"\nРазмах = $range%1.2f\nМатематическое ожидание = $expectedValue%1.3f\nСреднеквадратическое отклонение = $standardDeviation".
+      replace(",", "."))
   EmpiricalDistributionFunction.show(sortedArray) // выводи и строим график эмпирической функции
   Frequency.show(sortedArray) // строим гистограмму и полигон приведенных частот группированной выборки
 }
